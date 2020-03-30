@@ -5,14 +5,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Bruker {
-    private static ObservableList<Bruker> kundeForsikring= FXCollections.observableArrayList();
+    public static ObservableList<Bruker> brukereListe= FXCollections.observableArrayList();
     public static ObservableList<Bruker> getKundeForsikring() {
-        return kundeForsikring;
+        return brukereListe;
     }
     public static void setKundeForsikring(ObservableList<Bruker> kundeForsikring) {
-        Bruker.kundeForsikring = kundeForsikring;
+        Bruker.brukereListe = brukereListe;
     }
     private SimpleStringProperty fornavn;
+
+    public Bruker(String fornavn, String etternavn, String email, String telefon) {
+        this.fornavn = new SimpleStringProperty(fornavn);
+        this.etternavn = new SimpleStringProperty(etternavn);
+        this.email = new SimpleStringProperty(email);
+        this.telefon = new SimpleStringProperty(telefon);
+    }
+
     private SimpleStringProperty etternavn;
     private SimpleStringProperty email;
     private SimpleStringProperty telefon;

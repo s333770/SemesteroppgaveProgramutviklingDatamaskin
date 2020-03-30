@@ -5,11 +5,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import sample.Bruker.Bruker;
 
 import java.util.InputMismatchException;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
+import static sample.Bruker.Bruker.brukereListe;
 import static sample.BytteAvScener.lastInnStage;
 
 public class OpprettBrukerController {
@@ -38,6 +40,8 @@ public class OpprettBrukerController {
             sjekkOmAlleFeltErFyltUt();
             regExforInputFeilt();
             labelBekreftelse.setText("Bruker opprettet");
+            brukereListe.add(new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString()));
+
             //Finn ut hvordan man kan gi bekreftelse til bruker på at det fungerer
             lastInnStage(actionEvent, "/sample/sample.fxml");
         }

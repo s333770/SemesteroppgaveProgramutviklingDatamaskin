@@ -1,0 +1,32 @@
+/*
+#E63946 rød
+#F1FAEE hvit
+#A8DADC blå
+#457B9D mørkereblå
+#1D3557 mørkestblå
+*/
+.text{
+  -fx-background-color: #457B9D ;
+  -fx-text-fill: #F1FAEE;
+  -fx-font-size: 20px;
+  -fx-border-radius: 50%;
+  -fx-font-weight: 100;
+  -fx-padding: 20px,20px,20px,20px;
+}
+
+.button{
+  -fx-background-color: #457B9D ;
+    -fx-text-fill: #F1FAEE;
+    -fx-font-size: 20px;
+    -fx-border-radius: 50%;
+    -fx-font-weight: 100;
+    -fx-padding: 20px,20px,20px,20px;
+}
+.toggle-button{
+  -fx-background-color: #457B9D ;
+  -fx-text-fill: #F1FAEE;
+  -fx-font-size: 20px;
+  -fx-border-radius: 50%;
+  -fx-font-weight: 100;
+  -fx-padding: 20px,20px,20px,20px;
+}

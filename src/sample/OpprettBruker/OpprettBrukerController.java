@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import sample.Bruker.Bruker;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.InputMismatchException;
 import java.util.concurrent.TimeUnit;
 
@@ -40,9 +43,12 @@ public class OpprettBrukerController {
             sjekkOmAlleFeltErFyltUt();
             regExforInputFeilt();
             labelBekreftelse.setText("Bruker opprettet");
-            brukereListe.add(new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString()));
-
-            //Finn ut hvordan man kan gi bekreftelse til bruker på at det fungerer
+            Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString());
+            brukereListe.add(bruker1);
+            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser"));
+            objectOutputStream.writeObject(bruker1);
+            objectOutputStream.flush();
+            objectOutputStream.close();
             lastInnStage(actionEvent, "/sample/sample.fxml");
         }
         catch (InputMismatchException e){
@@ -56,9 +62,9 @@ public class OpprettBrukerController {
             alarmboks.setTitle("Feil i en av inputfeltene");
             alarmboks.setContentText(e.getMessage());
             alarmboks.show();
+        } catch (IOException e) {
+            System.err.println(e);
         }
-
-
 
 
     }
@@ -96,4 +102,7 @@ public class OpprettBrukerController {
 
     return "vellyktet";
     }
+
+
+
 }

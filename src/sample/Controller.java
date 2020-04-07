@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.event.ActionEvent;
 import sample.Bruker.Bruker;
 
 import java.io.FileInputStream;
@@ -23,8 +24,12 @@ public class Controller {
         System.out.println(brukerList.toString());
     }
 
+    public void loggInn(ActionEvent actionEvent) {
+        lastInnStage(actionEvent, "/sample/LoggInn/loggInn.fxml");
+
+    }
 
 
-        //lastInnStage(actionEvent, "/sample/OpprettBruker/opprettBruker.fxml");
+    //lastInnStage(actionEvent, "/sample/OpprettBruker/opprettBruker.fxml");
 
 }

@@ -7,8 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.text.Font?>
+
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OpprettBruker.OpprettBrukerController">
     <HBox alignment="CENTER" prefHeight="81.0" prefWidth="497.0" spacing="30.0">
         <children>
@@ -21,7 +21,7 @@
             <Insets top="30.0" />
         </padding>
     </HBox>
-   <HBox alignment="CENTER" layoutX="37.0" layoutY="150.0" prefHeight="100.0" prefWidth="527.0" spacing="30.0">
+   <HBox alignment="CENTER" layoutX="1.0" layoutY="150.0" prefHeight="100.0" prefWidth="594.0" spacing="30.0">
       <children>
          <VBox prefHeight="200.0" prefWidth="100.0">
             <children>
@@ -45,6 +45,12 @@
             <children>
                     <Label text="Email" />
                     <TextField fx:id="txtEmail" prefHeight="25.0" prefWidth="124.0" />
+            </children>
+         </VBox>
+         <VBox prefHeight="200.0" prefWidth="100.0">
+            <children>
+               <Label text="Passord" />
+               <TextField fx:id="txtPassord" />
             </children>
          </VBox>
       </children>

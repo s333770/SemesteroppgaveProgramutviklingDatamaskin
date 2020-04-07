@@ -24,7 +24,7 @@
                         <HBox alignment="CENTER" prefHeight="124.0" prefWidth="593.0" spacing="30.0">
                             <children>
                                 <Button mnemonicParsing="false" onAction="#bruker" prefHeight="70.0" prefWidth="278.0" stylesheets="@../stylesheet.css" text="Opprett bruker" />
-                                <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="260.0" stylesheets="@../stylesheet.css" text="Eksisterende bruker" />
+                                <Button mnemonicParsing="false" onAction="#loggInn" prefHeight="70.0" prefWidth="260.0" stylesheets="@../stylesheet.css" text="Logg inn" />
                             </children>
                         </HBox>
                     </children>

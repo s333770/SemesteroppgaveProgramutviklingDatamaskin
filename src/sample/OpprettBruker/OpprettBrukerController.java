@@ -35,6 +35,9 @@ public class OpprettBrukerController {
     private TextField txtEmail;
 
     @FXML
+    private TextField txtPassord;
+
+    @FXML
     private Label labelBekreftelse;
 
 
@@ -43,9 +46,9 @@ public class OpprettBrukerController {
             sjekkOmAlleFeltErFyltUt();
             regExforInputFeilt();
             labelBekreftelse.setText("Bruker opprettet");
-            Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString());
+            Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
             brukereListe.add(bruker1);
-            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser"));
+            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser",true));
             objectOutputStream.writeObject(bruker1);
             objectOutputStream.flush();
             objectOutputStream.close();

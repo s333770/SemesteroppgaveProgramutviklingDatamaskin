@@ -4,10 +4,7 @@ import javafx.event.ActionEvent;
 import org.w3c.dom.ls.LSOutput;
 import sample.Bruker.Bruker;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,28 +17,24 @@ public class LoggInnController {
 
 
 
-    public void loggInn(ActionEvent actionEvent) throws IOException {
+    public void loggInn(ActionEvent actionEvent) throws IOException, ClassNotFoundException {
         FileInputStream fis=new FileInputStream("bruker.ser");
         ObjectInputStream ois=new ObjectInputStream(fis);
-        try
-        {
-            while(true)
-            {
-                Bruker bruker = (Bruker)ois.readObject();
-            }
+        try{
+            String string1=(String)ois.readObject();
+            String string2=(String)ois.readObject();
+            String string3=(String)ois.readObject();
+            String string4=(String)ois.readObject();
+            String string5=(String)ois.readObject();
+            System.out.println(string1);
         }
-        catch(IOException e)
-        {
-            System.out.println("Serialisert begge objektene");
+        catch(EOFException e){
+            System.out.println("ferdig");
         }
-        catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        finally
-        {
             fis.close();    //<- Outside the while loop.
             ois.close();    //<- Outside the while loop.
-        }
+
+
 
 
 

@@ -49,9 +49,12 @@ public class OpprettBrukerController {
             Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
             brukereListe.add(bruker1);
             ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser",true));
-            objectOutputStream.writeObject(bruker1);
-            objectOutputStream.flush();
-            objectOutputStream.close();
+            objectOutputStream.writeObject(bruker1.fornavnProperty().toString());
+            objectOutputStream.writeObject(bruker1.etternavnProperty().toString());
+            objectOutputStream.writeObject(bruker1.emailProperty().toString());
+            objectOutputStream.writeObject(bruker1.telefonProperty().toString());
+            objectOutputStream.writeObject(bruker1.passordProperty().toString());
+
             lastInnStage(actionEvent, "/sample/sample.fxml");
         }
         catch (InputMismatchException e){

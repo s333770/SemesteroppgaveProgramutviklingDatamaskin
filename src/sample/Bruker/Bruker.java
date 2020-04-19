@@ -4,10 +4,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +41,7 @@ public class Bruker implements Serializable {
 
 
     public String getFornavn() {
-        return fornavn.get();
+        return this.fornavn.get();
     }
     public SimpleStringProperty fornavnProperty() {
         return fornavn;
@@ -83,11 +80,12 @@ public class Bruker implements Serializable {
     private void writeObject(ObjectOutputStream objectOutputStream) {
         try {
             objectOutputStream.defaultWriteObject();
-            objectOutputStream.writeUTF(getFornavn());
-            objectOutputStream.writeUTF(getEtternavn());
-            objectOutputStream.writeUTF(getTelefon());
-            objectOutputStream.writeUTF(getEmail());
-            objectOutputStream.writeUTF(getPassord());
+            objectOutputStream.writeObject(fornavnProperty().toString());
+            objectOutputStream.writeObject(etternavnProperty().toString());
+            objectOutputStream.writeObject(emailProperty().toString());
+            objectOutputStream.writeObject(telefonProperty().toString());
+            objectOutputStream.writeObject(passordProperty().toString());
+            objectOutputStream.close();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -95,16 +93,30 @@ public class Bruker implements Serializable {
     }
     private void readObject(ObjectInputStream objectInputStream){
         try {
+            /*
             SimpleStringProperty fornavnInput = new SimpleStringProperty(objectInputStream.readUTF());
             SimpleStringProperty etternavnInput = new SimpleStringProperty(objectInputStream.readUTF());
             SimpleStringProperty telefonInput = new SimpleStringProperty(objectInputStream.readUTF());
             SimpleStringProperty emailInput= new SimpleStringProperty(objectInputStream.readUTF());
             SimpleStringProperty passordInput=new SimpleStringProperty(objectInputStream.readUTF());
+            */
+            objectInputStream.defaultReadObject();
+            this.fornavn=new SimpleStringProperty(objectInputStream.readUTF());
+            this.etternavn=new SimpleStringProperty(objectInputStream.readUTF());
+            this.email=new SimpleStringProperty(objectInputStream.readUTF());
+            this.telefon=new SimpleStringProperty(objectInputStream.readUTF());
+            this.passord=new SimpleStringProperty(objectInputStream.readUTF());
+            objectInputStream.close();
+
+        } catch ( ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        catch(EOFException d){
+            System.out.println("Kastet i bruker");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
 
     }

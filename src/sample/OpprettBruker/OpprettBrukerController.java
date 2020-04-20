@@ -54,7 +54,6 @@ public class OpprettBrukerController {
             objectOutputStream.writeObject(bruker1.emailProperty().toString());
             objectOutputStream.writeObject(bruker1.telefonProperty().toString());
             objectOutputStream.writeObject(bruker1.passordProperty().toString());
-
             lastInnStage(actionEvent, "/sample/sample.fxml");
         }
         catch (InputMismatchException e){

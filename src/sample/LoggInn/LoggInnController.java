@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import static java.util.Arrays.stream;
 import static sample.Bruker.Bruker.brukereListe;
 import static sample.Bruker.Bruker.opprettedeBrukere;
+import static sample.BytteAvScener.lastInnStage;
 
 public class LoggInnController {
 
@@ -26,13 +27,12 @@ public class LoggInnController {
             String string3=(String)ois.readObject();
             String string4=(String)ois.readObject();
             String string5=(String)ois.readObject();
-            System.out.println(string1);
         }
         catch(EOFException e){
             System.out.println("ferdig");
         }
-            fis.close();    //<- Outside the while loop.
-            ois.close();    //<- Outside the while loop.
+            fis.close();
+            ois.close();
 
 
 
@@ -43,7 +43,7 @@ public class LoggInnController {
     }
 
     public void tilbake(ActionEvent actionEvent) {
-        System.out.println(opprettedeBrukere.get(0));
+        lastInnStage(actionEvent, "/sample/sample.fxml");
 
 
 

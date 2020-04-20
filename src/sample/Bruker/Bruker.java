@@ -80,6 +80,7 @@ public class Bruker implements Serializable {
     private void writeObject(ObjectOutputStream objectOutputStream) {
         try {
             objectOutputStream.defaultWriteObject();
+
             objectOutputStream.writeObject(fornavnProperty().toString());
             objectOutputStream.writeObject(etternavnProperty().toString());
             objectOutputStream.writeObject(emailProperty().toString());
@@ -106,13 +107,18 @@ public class Bruker implements Serializable {
             this.email=new SimpleStringProperty(objectInputStream.readUTF());
             this.telefon=new SimpleStringProperty(objectInputStream.readUTF());
             this.passord=new SimpleStringProperty(objectInputStream.readUTF());
-            objectInputStream.close();
+
 
         } catch ( ClassNotFoundException e) {
             e.printStackTrace();
         }
         catch(EOFException d){
             System.out.println("Kastet i bruker");
+            try {
+                objectInputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         } catch (IOException e) {
             e.printStackTrace();

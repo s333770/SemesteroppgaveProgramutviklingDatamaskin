@@ -7,9 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import sample.Bruker.Bruker;
 
+import javax.sql.rowset.serial.SerialArray;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +20,7 @@ import static java.lang.Thread.sleep;
 import static sample.Bruker.Bruker.brukereListe;
 import static sample.BytteAvScener.lastInnStage;
 
-public class OpprettBrukerController {
+public class OpprettBrukerController implements Serializable {
     Alert alarmboks = new Alert(Alert.AlertType.INFORMATION); // Lager en alarmboks
     Alert bekreftelse = new Alert(Alert.AlertType.INFORMATION); //Lager en bekreftelse
 
@@ -49,12 +52,9 @@ public class OpprettBrukerController {
             Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
             brukereListe.add(bruker1);
             ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser",true));
-            objectOutputStream.writeObject(bruker1.fornavnProperty().toString());
-            objectOutputStream.writeObject(bruker1.etternavnProperty().toString());
-            objectOutputStream.writeObject(bruker1.emailProperty().toString());
-            objectOutputStream.writeObject(bruker1.telefonProperty().toString());
-            objectOutputStream.writeObject(bruker1.passordProperty().toString());
+            objectOutputStream.writeObject(new ArrayList<>(brukereListe));
             lastInnStage(actionEvent, "/sample/sample.fxml");
+            objectOutputStream.close();
         }
         catch (InputMismatchException e){
             System.err.println(e.getMessage());

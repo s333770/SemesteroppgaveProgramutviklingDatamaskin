@@ -51,7 +51,7 @@ public class OpprettBrukerController implements Serializable {
             labelBekreftelse.setText("Bruker opprettet");
             Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
             brukereListe.add(bruker1);
-            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser",true));
+            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser"));
             objectOutputStream.writeObject(new ArrayList<>(brukereListe));
             lastInnStage(actionEvent, "/sample/sample.fxml");
             objectOutputStream.close();

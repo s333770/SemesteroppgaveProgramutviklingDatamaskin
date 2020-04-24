@@ -17,11 +17,7 @@ public class Controller {
     }
 
     public void administrator(javafx.event.ActionEvent actionEvent) throws IOException, ClassNotFoundException {
-        System.out.println("hello");
-        Bruker brukerList = null;
-        ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("bruker.txt"));
-        brukerList= (Bruker) objectInputStream.readObject();
-        System.out.println(brukerList.toString());
+        lastInnStage(actionEvent, "/sample/Administrator/administrator.fxml");
     }
 
     public void loggInn(ActionEvent actionEvent) {

@@ -23,8 +23,12 @@ public class LoggInnController implements Serializable {
         FileInputStream fis=new FileInputStream("bruker.ser");
         ObjectInputStream ois=new ObjectInputStream(fis);
         try{
-           opprettedeBrukere= FXCollections.observableList((List<Bruker>)ois.readObject());
-            System.out.println(opprettedeBrukere.toString());
+
+                opprettedeBrukere= FXCollections.observableList((List<Bruker>)ois.readObject());
+                System.out.println(opprettedeBrukere.toString());
+
+
+
 
         }
         catch(EOFException e){
@@ -48,6 +52,10 @@ public class LoggInnController implements Serializable {
 
 
 
+
+    }
+
+    public void btnDeserialize(ActionEvent actionEvent) {
 
     }
 }

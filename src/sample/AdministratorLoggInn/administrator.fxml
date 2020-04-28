@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdministratorLoggInn.AdministratorController">
+   <children>
+      <Button layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake" />
+      <Button layoutX="271.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnLoggInn" text="Logg Inn" />
+      <TextField fx:id="txtAdministratorBrukernavn" layoutX="211.0" layoutY="219.0" />
+      <TextField fx:id="txtAdministratorPassord" layoutX="211.0" layoutY="128.0" />
+      <Label layoutX="243.0" layoutY="94.0" prefHeight="17.0" prefWidth="97.0" text="Administrator" />
+      <Label layoutX="269.0" layoutY="192.0" text="Passord" />
+      <Label contentDisplay="CENTER" layoutX="28.0" layoutY="24.0" prefHeight="45.0" prefWidth="538.0" text="Administrator er lagret som enum, brukernavn for admin er &quot;admin1&quot; passord er også &quot;admin1&quot;" />
+   </children>
+</AnchorPane>

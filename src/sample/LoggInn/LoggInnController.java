@@ -62,7 +62,4 @@ public class LoggInnController implements Serializable {
         lastInnStage(actionEvent, "/sample/sample.fxml");
     }
 
-    public void btnDeserialize(ActionEvent actionEvent) {
-
-    }
 }

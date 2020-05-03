@@ -25,6 +25,7 @@ public class OpprettBrukerController implements Serializable {
     Alert bekreftelse = new Alert(Alert.AlertType.INFORMATION); //Lager en bekreftelse
 
 
+
     @FXML
     private TextField txtFornavn;
 
@@ -68,7 +69,7 @@ public class OpprettBrukerController implements Serializable {
             alarmboks.setContentText(e.getMessage());
             alarmboks.show();
         } catch (IOException e) {
-            System.err.println(e);
+            System.err.println(e); // Ikke synlig for bruker,
         }
 
 
@@ -88,8 +89,8 @@ public class OpprettBrukerController implements Serializable {
         String etternavn= txtEtternavn.getText();
         String email=txtEmail.getText();
         String telefon=txtTelefon.getText();
-        String regexFornavn = "^[a-zA-Z\\s]+";
-        String regexEtternavn= "^[a-zA-Z\\s]+";
+        String regexFornavn = "^[a-zA-Z-øæåØÆÅ\\s]+";
+        String regexEtternavn= "^[a-zA-Z-øæåØÆÅ\\s]+";
         String regexEmail="[^@]+@[^\\.]+\\..+";
         String regexTelefon="\\d{8}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
         if (!(fornavn.matches(regexFornavn))){
@@ -105,7 +106,7 @@ public class OpprettBrukerController implements Serializable {
             throw new IllegalArgumentException("Ikke gyldig telefon");
         }
 
-    return "vellyktet";
+    return "vellykket";
     }
 
 

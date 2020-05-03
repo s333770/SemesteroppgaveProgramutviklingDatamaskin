@@ -7,8 +7,8 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdministratorLoggInn.AdministratorController">
    <children>
-      <Button layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake" />
       <Button layoutX="271.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnLoggInn" text="Logg Inn" />
+      <Button layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake" />
       <TextField fx:id="txtAdministratorBrukernavn" layoutX="211.0" layoutY="219.0" />
       <TextField fx:id="txtAdministratorPassord" layoutX="211.0" layoutY="128.0" />
       <Label layoutX="243.0" layoutY="94.0" prefHeight="17.0" prefWidth="97.0" text="Administrator" />

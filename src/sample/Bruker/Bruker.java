@@ -12,6 +12,7 @@ public class Bruker implements Serializable {
     private static final long serialVersionUID = 6529685098267757690L;
 
     public static ObservableList<Bruker> brukereListe= FXCollections.observableArrayList();
+    public static ObservableList<Bruker> ferdigOpprettet=FXCollections.observableArrayList();
     public static List<Bruker> opprettedeBrukere=new ArrayList<>();
 
 
@@ -125,6 +126,8 @@ public class Bruker implements Serializable {
                 ", passord=" + passord +
                 '}';
     }
+
+    public static Bruker testBruker=new Bruker("fornavn","etternavn","eksempel@mail.com","12345678","testPassord");
 
 }
 

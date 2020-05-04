@@ -17,5 +17,6 @@
             <Button layoutX="73.0" layoutY="185.0" mnemonicParsing="false" onAction="#tilbake" text="Tilbake" />
          </children>
       </AnchorPane>
+      <Label layoutX="20.0" layoutY="10.0" prefHeight="87.0" prefWidth="550.0" text="Her skal systemet lese inn de serialiserte brukerne lagret i &quot;bruker.ser&quot;. Dersom det mot formodning skulle oppstå problemer med dette \n kan man bruke testbrukeren for å logge inn, her er telefon=&quot;12345678&quot; og passord=&quot;testpassord&quot;" />
    </children>
 </AnchorPane>

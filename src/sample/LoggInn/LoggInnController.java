@@ -7,6 +7,7 @@ import javafx.scene.control.Alert;
 import org.w3c.dom.ls.LSOutput;
 import sample.Bruker.Bruker;
 import javafx.scene.control.TextField;
+import sample.FinnerIngenBrukere;
 
 
 import java.io.*;
@@ -15,8 +16,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
-import static sample.Bruker.Bruker.brukereListe;
-import static sample.Bruker.Bruker.opprettedeBrukere;
+import static sample.Bruker.Bruker.*;
 import static sample.BytteAvScener.lastInnStage;
 
 public class LoggInnController implements Serializable {
@@ -40,7 +40,10 @@ public class LoggInnController implements Serializable {
             opprettedeBrukere= FXCollections.observableList((List<Bruker>)ois.readObject());
             opprettedeBrukere.forEach((x)->{
                 if((brukerTxtTelefonEmail.equals(x.getTelefon())||brukerTxtTelefonEmail.equals(x.getEmail()))&&(brukerTxtPassord.equals(x.getPassord()))) {
-                    lastInnStage(actionEvent, "/sample/sample.fxml");
+                    lastInnStage(actionEvent, "/sample/PCKonfigurasjon/PCKonfigurasjon.fxml");
+                }
+                else if(brukerTxtTelefonEmail.equals(testBruker.getTelefon())||brukerTxtTelefonEmail.equals(testBruker.getEmail())&&(testBruker.equals(x.getPassord()))){
+                    lastInnStage(actionEvent,"/sample/PCKonfigurasjon/PCKonfigurasjon.fxml");
                 }
                 else{
                     alarmboks.setTitle("Feil i en av inputfeltene");
@@ -51,7 +54,7 @@ public class LoggInnController implements Serializable {
 
         }
         catch(EOFException e){
-            System.out.println(e);
+            System.out.println("Noe gikk galt under innlesning av serialisert data, bruk testbruker");
         }
         catch(ClassNotFoundException e){
             System.out.println("Class is not found");

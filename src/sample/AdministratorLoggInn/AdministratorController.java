@@ -29,7 +29,7 @@ public class AdministratorController {
         if(txtAdministratorBrukernavn.getText().equals(Administrator.Administrator1.getAdministratorBrukernavn())){
 
             if(txtAdministratorPassord.getText().equals(Administrator.Administrator1.getAdministratorPassord())){
-                lastInnStage(actionEvent,"/sample/PCKonfigurasjon/PCKonfigurasjon.fxml");
+                lastInnStage(actionEvent,"/sample/AdministratorKomponenter/administratorKomp.fxml");
             }
             else if(!(txtAdministratorPassord.equals(Administrator.Administrator1.getAdministratorPassord()))){
                 System.out.println("Du har ikke adgang, ugyldig passord");
@@ -44,7 +44,7 @@ public class AdministratorController {
     }
 
     public void btnTilbake(ActionEvent actionEvent) {
-        lastInnStage(actionEvent, "/sample/sample.fxml");
+        lastInnStage(actionEvent, "/AdministratorKomponenter/administratorKomp.fxml");
 
     }
 

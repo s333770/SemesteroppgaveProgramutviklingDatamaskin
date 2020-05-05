@@ -52,14 +52,6 @@ public class PCKonfigurasjonController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        harddiskListe.add(harddisk1);
-        harddiskListe.add(harddisk2);
-        minneListe.add(minne1);
-        minneListe.add(minne2);
-        prosessorListe.add(prosessor1);
-        prosessorListe.add(prosessor2);
-        skjermkortListe.add(skjermkort1);
-        skjermkortListe.add(skjermkort2);
 
     setTabellVerdierProsessor("prosessor", "prosessorPris");
     tableViewProsessor.setItems(prosessorListe);
@@ -88,24 +80,6 @@ public class PCKonfigurasjonController implements Initializable {
         harddisk.setCellValueFactory(new PropertyValueFactory<Harddisk,String>("harddisk"));
         harddiskPris.setCellValueFactory(new PropertyValueFactory<Harddisk,String>("harddiskPris"));
     }
-
-
-
-
-
-
-/*
-    public void setTabellVerdier(String prosessorIn, String skjermkortIn, String minneIn, String harddiskIn){
-        prosessor.setCellValueFactory(new PropertyValueFactory<Datamaskin,String>("prosessor"));
-        skjermkort.setCellValueFactory(new PropertyValueFactory<Datamaskin,String>("skjermkort"));
-        minne.setCellValueFactory(new PropertyValueFactory<Datamaskin,String>("minne"));
-        harddisk.setCellValueFactory(new PropertyValueFactory<Datamaskin,String>("harddisk"));
-
-    }
-    */
-
-
-
     public void btnTilbake(ActionEvent actionEvent) {
         lastInnStage(actionEvent, "/sample/sample.fxml");
 
@@ -132,7 +106,6 @@ public class PCKonfigurasjonController implements Initializable {
         tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
                         totalPris.toString());
 
-        System.out.println(valgtDatamaskin.getHarddisk());
     }
 
     public void regnUtPris(ActionEvent actionEvent) {

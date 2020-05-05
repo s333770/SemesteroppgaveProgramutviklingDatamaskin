@@ -13,6 +13,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+import static sample.BytteAvScener.lastInnStage;
 import static sample.Datamaskin.Harddisk.*;
 import static sample.Datamaskin.Minne.*;
 import static sample.Datamaskin.Prosessor.*;
@@ -106,12 +107,32 @@ public class PCKonfigurasjonController implements Initializable {
 
 
     public void btnTilbake(ActionEvent actionEvent) {
+        lastInnStage(actionEvent, "/sample/sample.fxml");
 
     }
 
     public void btnOrdreBekfreftelse(ActionEvent actionEvent) {
+        String prosessorPris;
+        String minnePris;
+        String skjermkortPris;
+        String harddiskPris;
+        Integer totalPris;
+        prosessorPris=tableViewProsessor.getSelectionModel().getSelectedItem().getProsessorPris().toString();
+        minnePris=tableViewMinne.getSelectionModel().getSelectedItem().getMinnePris().toString();
+        skjermkortPris=tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkortPris().toString();
+        harddiskPris=tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
+        totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
 
 
+        Datamaskin valgtDatamaskin=
+                new Datamaskin(
+                tableViewProsessor.getSelectionModel().getSelectedItem().getProsessor().toString(),
+        tableViewMinne.getSelectionModel().getSelectedItem().getMinne().toString(),
+        tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkort().toString(),
+        tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
+                        totalPris.toString());
+
+        System.out.println(valgtDatamaskin.getHarddisk());
     }
 
     public void regnUtPris(ActionEvent actionEvent) {

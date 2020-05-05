@@ -13,14 +13,10 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-import static sample.Datamaskin.Harddisk.harddisk1;
-import static sample.Datamaskin.Harddisk.harddiskListe;
-import static sample.Datamaskin.Minne.minne1;
-import static sample.Datamaskin.Minne.minneListe;
-import static sample.Datamaskin.Prosessor.prosessor1;
-import static sample.Datamaskin.Prosessor.prosessorListe;
-import static sample.Datamaskin.Skjermkort.skjermkort1;
-import static sample.Datamaskin.Skjermkort.skjermkortListe;
+import static sample.Datamaskin.Harddisk.*;
+import static sample.Datamaskin.Minne.*;
+import static sample.Datamaskin.Prosessor.*;
+import static sample.Datamaskin.Skjermkort.*;
 
 
 public class PCKonfigurasjonController implements Initializable {
@@ -56,24 +52,46 @@ public class PCKonfigurasjonController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         harddiskListe.add(harddisk1);
+        harddiskListe.add(harddisk2);
         minneListe.add(minne1);
+        minneListe.add(minne2);
         prosessorListe.add(prosessor1);
+        prosessorListe.add(prosessor2);
         skjermkortListe.add(skjermkort1);
+        skjermkortListe.add(skjermkort2);
 
-
-    setTabellVerdier(harddiskListe.get(0).getHarddisk(),minneListe.get(0).getMinne(),prosessorListe.get(0).getProsessor(),harddiskListe.get(0).getHarddisk());
+    setTabellVerdierProsessor("prosessor", "prosessorPris");
     tableViewProsessor.setItems(prosessorListe);
+    setTabellVerdierSkjermkort("skjermkort", "skjermkortPris");
     tableViewSkjermkort.setItems(skjermkortListe);
+    setTabellVerdierMinne("minne", "minnePris");
     tableViewMinne.setItems(minneListe);
+    setTabellVerdierHarddisk("harddisk", "harddiskPris");
     tableViewHarddisk.setItems(harddiskListe);
-    }
-    public void setTabellVerdier(String prosessorIn, String skjermkortIn, String minneIn, String harddiskIn){
-        prosessor.setCellValueFactory(new PropertyValueFactory<Prosessor,String>("prosessor"));
-        skjermkort.setCellValueFactory(new PropertyValueFactory<Skjermkort,String>("skjermkort"));
-        minne.setCellValueFactory(new PropertyValueFactory<Minne,String>("minne"));
-        harddisk.setCellValueFactory(new PropertyValueFactory<Harddisk,String>("harddisk"));
 
     }
+
+    public void setTabellVerdierProsessor(String prosessorIn, String prosessorInPris){
+        prosessor.setCellValueFactory(new PropertyValueFactory<Prosessor,String>("prosessor"));
+        prosessorPris.setCellValueFactory(new PropertyValueFactory<Prosessor,String>("prosessorPris"));
+    }
+    public void setTabellVerdierSkjermkort(String skjermkortIn, String skjermkortInpris){
+        skjermkort.setCellValueFactory(new PropertyValueFactory<Skjermkort,String>("skjermkort"));
+        skjermkortPris.setCellValueFactory(new PropertyValueFactory<Skjermkort,String>("skjermkortPris"));
+    }
+    public void setTabellVerdierMinne(String minneIn, String minneInPris){
+        minne.setCellValueFactory(new PropertyValueFactory<Minne,String>("minne"));
+        minnePris.setCellValueFactory(new PropertyValueFactory<Minne,String>("minnePris"));
+    }
+    public void setTabellVerdierHarddisk(String harddiskIn, String harddiskInPris){
+        harddisk.setCellValueFactory(new PropertyValueFactory<Harddisk,String>("harddisk"));
+        harddiskPris.setCellValueFactory(new PropertyValueFactory<Harddisk,String>("harddiskPris"));
+    }
+
+
+
+
+
 
 /*
     public void setTabellVerdier(String prosessorIn, String skjermkortIn, String minneIn, String harddiskIn){
@@ -93,6 +111,21 @@ public class PCKonfigurasjonController implements Initializable {
 
     public void btnOrdreBekfreftelse(ActionEvent actionEvent) {
 
+
+    }
+
+    public void regnUtPris(ActionEvent actionEvent) {
+        String prosessorPris;
+        String minnePris;
+        String skjermkortPris;
+        String harddiskPris;
+        Integer totalPris;
+        prosessorPris=tableViewProsessor.getSelectionModel().getSelectedItem().getProsessorPris().toString();
+        minnePris=tableViewMinne.getSelectionModel().getSelectedItem().getMinnePris().toString();
+        skjermkortPris=tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkortPris().toString();
+        harddiskPris=tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
+        totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
+        System.out.println(totalPris);
 
     }
 }

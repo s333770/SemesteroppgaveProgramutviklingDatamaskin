@@ -39,4 +39,6 @@ public class Minne {
         this.minnePris.set(minnePris);
     }
     public static Minne minne1=new Minne("25GB","400");
+    public static Minne minne2=new Minne("50GB","800");
+
 }

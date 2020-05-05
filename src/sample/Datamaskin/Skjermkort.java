@@ -41,4 +41,5 @@ public class Skjermkort {
         this.skjermkortPris.set(skjermkortPris);
     }
     public static Skjermkort skjermkort1=new Skjermkort("GTX 950", "800");
+    public static Skjermkort skjermkort2=new Skjermkort("GTX 1050", "1200");
 }

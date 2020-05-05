@@ -39,5 +39,7 @@ public class Harddisk {
         this.harddiskPris.set(harddiskPris);
     }
     public static Harddisk harddisk1=new Harddisk("200 GB", "500");
+    public static Harddisk harddisk2=new Harddisk("100GB","1000");
+
 
 }

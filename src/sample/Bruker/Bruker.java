@@ -127,6 +127,16 @@ public class Bruker implements Serializable {
                 '}';
     }
 
+
+
+
+
+
+
+
+
+
+
     public static Bruker testBruker=new Bruker("fornavn","etternavn","eksempel@mail.com","12345678","testPassord");
 
 }

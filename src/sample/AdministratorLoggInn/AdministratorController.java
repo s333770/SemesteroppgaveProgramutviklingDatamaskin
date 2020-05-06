@@ -18,11 +18,6 @@ public class AdministratorController {
     TextField txtAdministratorPassord;
 
 
-
-
-
-
-
     public void btnLoggInn(ActionEvent actionEvent) {
         System.out.println(Administrator.Administrator1.getAdministratorBrukernavn());
 
@@ -44,7 +39,7 @@ public class AdministratorController {
     }
 
     public void btnTilbake(ActionEvent actionEvent) {
-        lastInnStage(actionEvent, "/AdministratorKomponenter/administratorKomp.fxml");
+        lastInnStage(actionEvent, "/sample/sample.fxml");
 
     }
 

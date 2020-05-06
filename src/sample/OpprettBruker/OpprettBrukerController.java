@@ -52,7 +52,7 @@ public class OpprettBrukerController implements Serializable {
             labelBekreftelse.setText("Bruker opprettet");
             Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
             brukereListe.add(bruker1);
-            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("bruker.ser"));
+            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("/sample/brukerSerialisert/Bruker.ser"));
             objectOutputStream.writeObject(new ArrayList<>(brukereListe));
             lastInnStage(actionEvent, "/sample/sample.fxml");
             objectOutputStream.close();
@@ -89,8 +89,8 @@ public class OpprettBrukerController implements Serializable {
         String etternavn= txtEtternavn.getText();
         String email=txtEmail.getText();
         String telefon=txtTelefon.getText();
-        String regexFornavn = "^[a-zA-Z-øæåØÆÅ\\s]+";
-        String regexEtternavn= "^[a-zA-Z-øæåØÆÅ\\s]+";
+        String regexFornavn = "^[a-zA-Z-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\\s]+";
+        String regexEtternavn= "^[a-zA-Z-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\\s]+";
         String regexEmail="[^@]+@[^\\.]+\\..+";
         String regexTelefon="\\d{8}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
         if (!(fornavn.matches(regexFornavn))){

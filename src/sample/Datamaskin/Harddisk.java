@@ -4,7 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Harddisk {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Harddisk implements Serializable {
 
     public static ObservableList<Harddisk> harddiskListe= FXCollections.observableArrayList();
 
@@ -40,6 +45,28 @@ public class Harddisk {
     }
     public static Harddisk harddisk1=new Harddisk("200 GB", "500");
     public static Harddisk harddisk2=new Harddisk("100GB","1000");
+
+    private void readObject(ObjectInputStream objectInputStream){
+        try {
+            objectInputStream.defaultReadObject();
+            this.harddisk=new SimpleStringProperty((String)objectInputStream.readObject());
+            this.harddiskPris=new SimpleStringProperty((String)objectInputStream.readObject());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void writeObject(ObjectOutputStream objectOutputStream) {
+        try {
+            objectOutputStream.defaultWriteObject();
+            objectOutputStream.writeObject(getHarddisk());
+            objectOutputStream.writeObject(getHarddiskPris());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

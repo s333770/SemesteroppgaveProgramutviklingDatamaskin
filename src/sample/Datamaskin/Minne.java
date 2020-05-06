@@ -4,7 +4,12 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public class Minne {
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class Minne implements Serializable {
     public static ObservableList<Minne> minneListe= FXCollections.observableArrayList();
 
     private SimpleStringProperty minne;
@@ -40,5 +45,27 @@ public class Minne {
     }
     public static Minne minne1=new Minne("25GB","400");
     public static Minne minne2=new Minne("50GB","800");
+
+    private void readObject(ObjectInputStream objectInputStream){
+        try {
+            objectInputStream.defaultReadObject();
+            this.minne=new SimpleStringProperty((String)objectInputStream.readObject());
+            this.minnePris=new SimpleStringProperty((String)objectInputStream.readObject());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+    private void writeObject(ObjectOutputStream objectOutputStream) {
+        try {
+            objectOutputStream.defaultWriteObject();
+            objectOutputStream.writeObject(getMinne());
+            objectOutputStream.writeObject(getMinnePris());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

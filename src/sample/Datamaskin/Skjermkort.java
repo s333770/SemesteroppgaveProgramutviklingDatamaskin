@@ -11,11 +11,10 @@ import java.io.Serializable;
 
 public class Skjermkort implements Serializable {
     public static ObservableList<Skjermkort> skjermkortListe= FXCollections.observableArrayList();
+    public static ObservableList<Skjermkort> skjermkortListeDeserialisert= FXCollections.observableArrayList();
 
-
-
-    private SimpleStringProperty skjermkort;
-    private SimpleStringProperty skjermkortPris;
+    private transient SimpleStringProperty skjermkort;
+    private transient SimpleStringProperty skjermkortPris;
 
     public Skjermkort(String skjermkort, String skjermkortPris) {
         this.skjermkort = new SimpleStringProperty(skjermkort);

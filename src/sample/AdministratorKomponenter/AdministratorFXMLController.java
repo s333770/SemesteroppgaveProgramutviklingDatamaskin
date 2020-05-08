@@ -1,16 +1,16 @@
 package sample.AdministratorKomponenter;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import sample.Datamaskin.Harddisk;
-import sample.Datamaskin.Minne;
-import sample.Datamaskin.Prosessor;
-import sample.Datamaskin.Skjermkort;
+import sample.Datamaskin.*;
 import sample.PCKonfigurasjon.PCKonfigurasjonController;
+import sample.lastInnThread;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -65,21 +65,35 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
     Alert alarmboks = new Alert(Alert.AlertType.INFORMATION); // Lager en alarmboks
     Alert bekreftelse = new Alert(Alert.AlertType.INFORMATION); //Lager en bekreftelse
 
+    Thread t1=new Thread(new Runnable() {
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            tableViewProsessor.setItems(prosessorListe);
+            tableViewSkjermkort.setItems(skjermkortListe);
+            tableViewMinne.setItems(minneListe);
+            tableViewHarddisk.setItems(harddiskListe);
 
+        }
+    });
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         komponenterchoiceBox.getItems().addAll("Prosessor","Skjermkort","Minne","Harddisk");
         setTabellVerdierProsessor("prosessor", "prosessorPris");
-        tableViewProsessor.setItems(prosessorListe);
         setTabellVerdierSkjermkort("skjermkort", "skjermkortPris");
-        tableViewSkjermkort.setItems(skjermkortListe);
         setTabellVerdierMinne("minne", "minnePris");
-        tableViewMinne.setItems(minneListe);
         setTabellVerdierHarddisk("harddisk", "harddiskPris");
-        tableViewHarddisk.setItems(harddiskListe);
+
+        t1.start();
     }
+
+
     public void btnLeggtil(ActionEvent actionEvent) {
         if(komponenterchoiceBox.getValue().equals("Prosessor")){
             Prosessor prosessor=new Prosessor(txtKomponent.getText(),txtPris.getText());
@@ -194,7 +208,4 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
     public void btnTilbake(ActionEvent actionEvent) {
         lastInnStage(actionEvent, "/sample/sample.fxml");
     }
-
-
-
 }

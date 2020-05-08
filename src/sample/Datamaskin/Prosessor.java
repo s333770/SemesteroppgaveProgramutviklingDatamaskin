@@ -11,10 +11,11 @@ import java.io.Serializable;
 
 public class Prosessor implements Serializable {
     public static ObservableList<Prosessor> prosessorListe= FXCollections.observableArrayList();
+    public static ObservableList<Prosessor> prosessorListeDeserialisert= FXCollections.observableArrayList();
 
 
-    private SimpleStringProperty prosessor;
-    private SimpleStringProperty prosessorPris;
+    private transient SimpleStringProperty prosessor;
+    private transient SimpleStringProperty prosessorPris;
 
     public Prosessor(String prosessor, String prosessorPris) {
         this.prosessor = new SimpleStringProperty(prosessor);

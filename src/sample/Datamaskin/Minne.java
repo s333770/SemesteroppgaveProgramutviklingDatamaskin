@@ -11,9 +11,10 @@ import java.io.Serializable;
 
 public class Minne implements Serializable {
     public static ObservableList<Minne> minneListe= FXCollections.observableArrayList();
+    public static ObservableList<Minne> minneListeDeserialisert= FXCollections.observableArrayList();
 
-    private SimpleStringProperty minne;
-    private SimpleStringProperty minnePris;
+    private transient SimpleStringProperty minne;
+    private transient SimpleStringProperty minnePris;
 
     public Minne(String minne, String minnePris) {
         this.minne =new SimpleStringProperty(minne);

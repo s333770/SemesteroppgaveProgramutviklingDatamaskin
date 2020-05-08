@@ -12,9 +12,11 @@ import java.io.Serializable;
 public class Harddisk implements Serializable {
 
     public static ObservableList<Harddisk> harddiskListe= FXCollections.observableArrayList();
+    public static ObservableList<Harddisk> harddiskListeDeserialisert= FXCollections.observableArrayList();
 
-    private SimpleStringProperty harddisk;
-    private SimpleStringProperty harddiskPris;
+
+    private transient SimpleStringProperty harddisk;
+    private transient SimpleStringProperty harddiskPris;
 
     public Harddisk(String harddisk, String harddiskPris) {
         this.harddisk = new SimpleStringProperty(harddisk);

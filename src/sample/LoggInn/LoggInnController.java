@@ -34,7 +34,7 @@ public class LoggInnController implements Serializable {
         String brukerTxtTelefonEmail=txtTelefonEmail.getText();
         String brukerTxtPassord=txtPassord.getText();
 
-        FileInputStream fis=new FileInputStream("/sample/brukerSerialisert/Bruker.ser");
+        FileInputStream fis=new FileInputStream("src/sample/brukerSerialisert/bruker.ser");
         ObjectInputStream ois=new ObjectInputStream(fis);
         try{
             opprettedeBrukere= FXCollections.observableList((List<Bruker>)ois.readObject());

@@ -4,16 +4,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import org.w3c.dom.ls.LSOutput;
 import sample.Bruker.Bruker;
 import javafx.scene.control.TextField;
-import sample.FinnerIngenBrukere;
 
 
 import java.io.*;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.Arrays.stream;
 import static sample.Bruker.Bruker.*;

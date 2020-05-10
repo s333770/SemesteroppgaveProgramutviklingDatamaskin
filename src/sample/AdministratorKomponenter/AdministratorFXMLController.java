@@ -70,13 +70,106 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         public void run() {
             try {
                 Thread.sleep(3000);
+                if(komponenterchoiceBox.getValue().equals("Prosessor")){
+                    Prosessor prosessor=new Prosessor(txtKomponent.getText(),txtPris.getText());
+                    prosessorListe.add(prosessor);
+                    try {
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/prosessor.ser"));
+                        objectOutputStream.writeObject(new ArrayList<>(prosessorListe));
+                        objectOutputStream.close();
+                    }
+                    catch (InputMismatchException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    } catch (IOException e) {
+                        System.err.println(e); // Ikke synlig for bruker,
+                    }
+                }
+                else if(komponenterchoiceBox.getValue().equals("Skjermkort")){
+                    Skjermkort skjermkort =new Skjermkort(txtKomponent.getText(),txtPris.getText());
+                    skjermkortListe.add(skjermkort);
+                    try {
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/skjermkort.ser"));
+                        objectOutputStream.writeObject(new ArrayList<>(skjermkortListe));
+                        objectOutputStream.close();
+                    }
+                    catch (InputMismatchException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    } catch (IOException e) {
+                        System.err.println(e); // Ikke synlig for bruker,
+                    }
+                }
+                else if(komponenterchoiceBox.getValue().equals("Minne")){
+                    Minne minne=new Minne(txtKomponent.getText(),txtPris.getText());
+                    minneListe.add(minne);
+                    try {
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/Minne.ser"));
+                        objectOutputStream.writeObject(new ArrayList<>(minneListe));
+                        objectOutputStream.close();
+                    }
+                    catch (InputMismatchException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    } catch (IOException e) {
+                        System.err.println(e); // Ikke synlig for bruker,
+                    }
+                }
+                else if(komponenterchoiceBox.getValue().equals("Harddisk")){
+                    Harddisk harddisk =new Harddisk(txtKomponent.getText(),txtPris.getText());
+                    harddiskListe.add(harddisk);
+                    try {
+                        ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/harddisk.ser"));
+                        objectOutputStream.writeObject(new ArrayList<>(harddiskListe));
+                        objectOutputStream.close();
+                    }
+                    catch (InputMismatchException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    }
+                    catch (IllegalArgumentException e){
+                        System.err.println(e.getMessage());
+                        alarmboks.setTitle("Feil i en av inputfeltene");
+                        alarmboks.setContentText(e.getMessage());
+                        alarmboks.show();
+                    } catch (IOException e) {
+                        System.err.println(e); // Ikke synlig for bruker,
+                    }
+
+                }
+                else{
+                    System.out.println("Noe gikk galt");
+                }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            tableViewProsessor.setItems(prosessorListe);
-            tableViewSkjermkort.setItems(skjermkortListe);
-            tableViewMinne.setItems(minneListe);
-            tableViewHarddisk.setItems(harddiskListe);
+
 
         }
     });
@@ -89,108 +182,15 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         setTabellVerdierSkjermkort("skjermkort", "skjermkortPris");
         setTabellVerdierMinne("minne", "minnePris");
         setTabellVerdierHarddisk("harddisk", "harddiskPris");
-
-        t1.start();
+        tableViewProsessor.setItems(prosessorListe);
+        tableViewSkjermkort.setItems(skjermkortListe);
+        tableViewMinne.setItems(minneListe);
+        tableViewHarddisk.setItems(harddiskListe);
     }
 
 
     public void btnLeggtil(ActionEvent actionEvent) {
-        if(komponenterchoiceBox.getValue().equals("Prosessor")){
-            Prosessor prosessor=new Prosessor(txtKomponent.getText(),txtPris.getText());
-            prosessorListe.add(prosessor);
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/prosessor.ser"));
-                objectOutputStream.writeObject(new ArrayList<>(prosessorListe));
-                objectOutputStream.close();
-            }
-            catch (InputMismatchException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            }
-            catch (IllegalArgumentException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            } catch (IOException e) {
-                System.err.println(e); // Ikke synlig for bruker,
-            }
-        }
-        else if(komponenterchoiceBox.getValue().equals("Skjermkort")){
-            Skjermkort skjermkort =new Skjermkort(txtKomponent.getText(),txtPris.getText());
-            skjermkortListe.add(skjermkort);
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/skjermkort.ser"));
-                objectOutputStream.writeObject(new ArrayList<>(skjermkortListe));
-                objectOutputStream.close();
-            }
-            catch (InputMismatchException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            }
-            catch (IllegalArgumentException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            } catch (IOException e) {
-                System.err.println(e); // Ikke synlig for bruker,
-            }
-        }
-        else if(komponenterchoiceBox.getValue().equals("Minne")){
-            Minne minne=new Minne(txtKomponent.getText(),txtPris.getText());
-            minneListe.add(minne);
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/Minne.ser"));
-                objectOutputStream.writeObject(new ArrayList<>(minneListe));
-                objectOutputStream.close();
-            }
-            catch (InputMismatchException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            }
-            catch (IllegalArgumentException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            } catch (IOException e) {
-                System.err.println(e); // Ikke synlig for bruker,
-            }
-        }
-        else if(komponenterchoiceBox.getValue().equals("Harddisk")){
-            Harddisk harddisk =new Harddisk(txtKomponent.getText(),txtPris.getText());
-            harddiskListe.add(harddisk);
-            try {
-                ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/harddisk.ser"));
-                objectOutputStream.writeObject(new ArrayList<>(harddiskListe));
-                objectOutputStream.close();
-            }
-            catch (InputMismatchException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            }
-            catch (IllegalArgumentException e){
-                System.err.println(e.getMessage());
-                alarmboks.setTitle("Feil i en av inputfeltene");
-                alarmboks.setContentText(e.getMessage());
-                alarmboks.show();
-            } catch (IOException e) {
-                System.err.println(e); // Ikke synlig for bruker,
-            }
-
-        }
-        else{
-            System.out.println("Noe gikk galt");
-        }
+       t1.run();
 
 
 

@@ -5,16 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import sample.Bruker.Bruker;
 import sample.Datamaskin.*;
+import sample.EgendefinerteAvvik.FinnerIkkeSerialisertFil;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,6 +27,7 @@ import static sample.Datamaskin.Harddisk.*;
 import static sample.Datamaskin.Minne.*;
 import static sample.Datamaskin.Prosessor.*;
 import static sample.Datamaskin.Skjermkort.*;
+import static sample.SkrivData.SkrivUtDataCSV.skrivDataTilCSVFil;
 
 
 public class PCKonfigurasjonController implements Initializable {
@@ -57,6 +59,9 @@ public class PCKonfigurasjonController implements Initializable {
     @FXML
     TableColumn<Harddisk, String> harddiskPris;
 
+    @FXML
+    Label lblBeregnetPris;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -75,84 +80,117 @@ public class PCKonfigurasjonController implements Initializable {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        catch (NullPointerException npe){
+            npe.printStackTrace();
+        }
         ObjectInputStream oisPros = null;
         try {
             oisPros = new ObjectInputStream(fisPros);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         try {
             prosessorListeDeserialisert = FXCollections.observableList((List<Prosessor>) oisPros.readObject());
             tableViewProsessor.setItems(prosessorListeDeserialisert);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Det er ingen readObjects for prosessor");;
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke klasse");
         }
-
+        catch (NullPointerException npe){
+            npe.printStackTrace();
+        }
+/*#############################################################################*/
         FileInputStream fisMinne = null;
         try {
             fisMinne = new FileInputStream("src/sample/komponenterSerialisert/minne.ser");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke serialisert fil");
         }
         ObjectInputStream oisMinne = null;
         try {
             oisMinne = new ObjectInputStream(fisMinne);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Klarer ikke å åpne inputstream");
+        }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
         }
         try {
             minneListeDeserialisert = FXCollections.observableList((List<Minne>) oisMinne.readObject());
             tableViewMinne.setItems(minneListeDeserialisert);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Klarer ikke å åpne inputstream");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke klasse");
         }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
+    }
+        /*#############################################################################*/
         FileInputStream fisSkjermkort = null;
         try {
             fisSkjermkort = new FileInputStream("src/sample/komponenterSerialisert/skjermkort.ser");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
+        }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
         }
         ObjectInputStream oisSkjermkort = null;
         try {
             oisSkjermkort = new ObjectInputStream(oisSkjermkort);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Klarer ikke å lese inputstream");
         }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
+        }
+
         try {
             skjermkortListeDeserialisert= FXCollections.observableList((List<Skjermkort>) oisSkjermkort.readObject());
             tableViewSkjermkort.setItems(skjermkortListeDeserialisert);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke klasse");
         }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
+        }
+
+
+
         FileInputStream fisHarddisk = null;
         try {
             fisSkjermkort = new FileInputStream("src/sample/komponenterSerialisert/harddisk.ser");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
         }
         ObjectInputStream oisHarddisk = null;
         try {
             oisSkjermkort = new ObjectInputStream(oisSkjermkort);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
+        }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
         }
         try {
             harddiskListeDeserialisert= FXCollections.observableList((List<Harddisk>) oisHarddisk.readObject());
             tableViewHarddisk.setItems(harddiskListeDeserialisert);
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
+        }
+        catch(NullPointerException npe){
+            System.err.println("Det er ikke opprettet en slik fil");
         }
 
     }
@@ -192,13 +230,22 @@ public class PCKonfigurasjonController implements Initializable {
         totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
 
 
-        Datamaskin valgtDatamaskin=
-                new Datamaskin(
+        Datamaskin valgtDatamaskin= new Datamaskin(
                 tableViewProsessor.getSelectionModel().getSelectedItem().getProsessor().toString(),
         tableViewMinne.getSelectionModel().getSelectedItem().getMinne().toString(),
         tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkort().toString(),
         tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
                         totalPris.toString());
+
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+
+        File file=directoryChooser.showDialog(null);
+        try {
+            skrivDataTilCSVFil(valgtDatamaskin,file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -213,7 +260,6 @@ public class PCKonfigurasjonController implements Initializable {
         skjermkortPris=tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkortPris().toString();
         harddiskPris=tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
         totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
-        System.out.println(totalPris);
-
+        lblBeregnetPris.setText(totalPris.toString());
     }
 }

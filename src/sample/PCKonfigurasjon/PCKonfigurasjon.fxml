@@ -10,13 +10,9 @@
 
 <AnchorPane prefHeight="606.0" prefWidth="543.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.PCKonfigurasjon.PCKonfigurasjonController">
    <children>
-      <Label fx:id="lblProsessorPris" layoutX="93.0" layoutY="373.0" prefHeight="17.0" prefWidth="62.0" />
-      <Label fx:id="lblSkjermkortPris" layoutX="210.0" layoutY="373.0" prefHeight="17.0" prefWidth="96.0" />
-      <Label fx:id="lblMinnePris" layoutX="361.0" layoutY="373.0" prefHeight="17.0" prefWidth="62.0" />
-      <Label fx:id="lblHarddiskPris" layoutX="479.0" layoutY="373.0" prefHeight="17.0" prefWidth="77.0" />
-      <Label layoutX="144.0" layoutY="14.0" prefHeight="57.0" prefWidth="271.0" text="Velg dine komponenter" />
-      <Button layoutX="94.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake " />
-      <Button layoutX="341.0" layoutY="537.0" mnemonicParsing="false" onAction="#btnOrdreBekfreftelse" prefHeight="27.0" prefWidth="226.0" text="Skriv ut ordrebekfreftelse" />
+      <Label alignment="CENTER" layoutX="144.0" layoutY="14.0" prefHeight="57.0" prefWidth="271.0" stylesheets="@../../stylesheet.css" text="Velg dine komponenter" />
+      <Button layoutX="65.0" layoutY="563.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake " />
+      <Button layoutX="341.0" layoutY="562.0" mnemonicParsing="false" onAction="#btnOrdreBekfreftelse" prefHeight="27.0" prefWidth="226.0" text="Skriv ut ordrebekfreftelse" />
       <VBox layoutY="89.0" prefHeight="400.0" prefWidth="581.0" spacing="40.0">
          <children>
             <HBox prefHeight="174.0" prefWidth="581.0" spacing="40.0">
@@ -53,6 +49,7 @@
             </HBox>
          </children>
       </VBox>
-      <Button layoutX="231.0" layoutY="537.0" mnemonicParsing="false" onAction="#regnUtPris" text="Regn ut Pris" />
+      <Button layoutX="341.0" layoutY="525.0" mnemonicParsing="false" onAction="#regnUtPris" text="Regn ut Pris" />
+      <Label fx:id="lblBeregnetPris" layoutX="440.0" layoutY="521.0" prefHeight="27.0" prefWidth="127.0" />
    </children>
 </AnchorPane>

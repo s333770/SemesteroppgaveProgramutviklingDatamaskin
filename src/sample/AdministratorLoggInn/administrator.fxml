@@ -4,15 +4,21 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.AdministratorLoggInn.AdministratorController">
    <children>
-      <TextField fx:id="txtAdministratorPassord" layoutX="211.0" layoutY="128.0" />
-      <TextField fx:id="txtAdministratorBrukernavn" layoutX="211.0" layoutY="219.0" />
-      <Button layoutX="271.0" layoutY="274.0" mnemonicParsing="false" onAction="#btnLoggInn" text="Logg Inn" />
-      <Button layoutX="271.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake" />
-      <Label layoutX="243.0" layoutY="94.0" prefHeight="17.0" prefWidth="97.0" text="Administrator" />
-      <Label layoutX="269.0" layoutY="192.0" text="Passord" />
-      <Label contentDisplay="CENTER" layoutX="28.0" layoutY="24.0" prefHeight="45.0" prefWidth="538.0" text="Administrator er lagret som enum, brukernavn for admin er &quot;admin1&quot; passord er også &quot;admin1&quot;" />
+      <TextField fx:id="txtAdministratorPassord" layoutX="217.0" layoutY="145.0" />
+      <TextField fx:id="txtAdministratorBrukernavn" layoutX="217.0" layoutY="220.0" />
+      <Button layoutX="258.0" layoutY="277.0" mnemonicParsing="false" onAction="#btnLoggInn" text="Logg Inn" />
+      <Button layoutX="263.0" layoutY="326.0" mnemonicParsing="false" onAction="#btnTilbake" text="Tilbake" />
+      <Label alignment="CENTER" layoutX="241.0" layoutY="105.0" prefHeight="17.0" prefWidth="97.0" text="Administrator" />
+      <Label alignment="CENTER" layoutX="269.0" layoutY="192.0" text="Passord" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="60.0" prefHeight="45.0" prefWidth="538.0" text="Administrator er lagret som enum, brukernavn for admin er &quot;admin&quot; passord er også &quot;admin&quot;. " />
+      <Label alignment="CENTER" layoutX="174.0" layoutY="23.0" prefHeight="45.0" prefWidth="235.0" text="Administrator">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

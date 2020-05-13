@@ -1,7 +1,8 @@
 package sample.Administrator;
 
 public enum Administrator{
-    Administrator1("admin1","admin1");
+    Administrator1("admin","admin");
+
 
     private String administratorBrukernavn;
     private String administratorPassord;

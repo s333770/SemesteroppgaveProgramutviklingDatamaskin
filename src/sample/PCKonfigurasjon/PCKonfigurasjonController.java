@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -13,7 +14,6 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import sample.Bruker.Bruker;
 import sample.Datamaskin.*;
-import sample.EgendefinerteAvvik.FinnerIkkeSerialisertFil;
 
 import java.io.*;
 import java.net.URL;
@@ -30,7 +30,10 @@ import static sample.Datamaskin.Skjermkort.*;
 import static sample.SkrivData.SkrivUtDataCSV.skrivDataTilCSVFil;
 
 
+
 public class PCKonfigurasjonController implements Initializable {
+    Alert alarmboks = new Alert(Alert.AlertType.INFORMATION); // Lager en alarmboks
+    Alert bekreftelse = new Alert(Alert.AlertType.INFORMATION); //Lager en bekreftelse
 
     @FXML
     private TableView<Prosessor> tableViewProsessor;
@@ -237,29 +240,37 @@ public class PCKonfigurasjonController implements Initializable {
         tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
                         totalPris.toString());
 
-        DirectoryChooser directoryChooser = new DirectoryChooser();
+        FileChooser fileChooser=new FileChooser();
+        /*
 
-        File file=directoryChooser.showDialog(null);
+
         try {
             skrivDataTilCSVFil(valgtDatamaskin,file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
+*/
 
     }
 
     public void regnUtPris(ActionEvent actionEvent) {
-        String prosessorPris;
-        String minnePris;
-        String skjermkortPris;
-        String harddiskPris;
-        Integer totalPris;
-        prosessorPris=tableViewProsessor.getSelectionModel().getSelectedItem().getProsessorPris().toString();
-        minnePris=tableViewMinne.getSelectionModel().getSelectedItem().getMinnePris().toString();
-        skjermkortPris=tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkortPris().toString();
-        harddiskPris=tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
-        totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
-        lblBeregnetPris.setText(totalPris.toString());
+        try {
+            String prosessorPris;
+            String minnePris;
+            String skjermkortPris;
+            String harddiskPris;
+            Integer totalPris;
+            prosessorPris = tableViewProsessor.getSelectionModel().getSelectedItem().getProsessorPris().toString();
+            minnePris = tableViewMinne.getSelectionModel().getSelectedItem().getMinnePris().toString();
+            skjermkortPris = tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkortPris().toString();
+            harddiskPris = tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
+            totalPris = Integer.parseInt(prosessorPris) + Integer.parseInt(minnePris) + Integer.parseInt(skjermkortPris) + Integer.parseInt(harddiskPris);
+            lblBeregnetPris.setText(totalPris.toString());
+        }
+        catch(NullPointerException e){
+            alarmboks.setContentText("Vennligst velg en av hvert komponent");
+            alarmboks.setTitle("Ikke alle komponenter er valgt");
+            alarmboks.show();
+        }
     }
 }

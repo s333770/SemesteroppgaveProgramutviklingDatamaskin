@@ -36,9 +36,11 @@ public class LoggInnController implements Serializable {
             opprettedeBrukere= FXCollections.observableList((List<Bruker>)ois.readObject());
             opprettedeBrukere.forEach((x)->{
                 if((brukerTxtTelefonEmail.equals(x.getTelefon())||brukerTxtTelefonEmail.equals(x.getEmail()))&&(brukerTxtPassord.equals(x.getPassord()))) {
+                   valgtBruker.add(new Bruker(x.getFornavn(),x.getEtternavn(),x.getEmail(),x.getTelefon(),x.getPassord()));
                     lastInnStage(actionEvent, "/sample/PCKonfigurasjon/PCKonfigurasjon.fxml");
                 }
                 else if(brukerTxtTelefonEmail.equals(testBruker.getTelefon())||brukerTxtTelefonEmail.equals(testBruker.getEmail())&&(testBruker.equals(x.getPassord()))){
+                    valgtBruker.add(new Bruker("TestNavn", "TestEtternavn", "TestEmail","TestTelefon","testPassord"));
                     lastInnStage(actionEvent,"/sample/PCKonfigurasjon/PCKonfigurasjon.fxml");
                 }
                 else{

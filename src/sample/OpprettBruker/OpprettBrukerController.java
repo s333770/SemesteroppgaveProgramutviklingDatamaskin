@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import sample.Bruker.Bruker;
+import sample.EgendefinerteAvvik.BrukerEksistererAllerede;
 
 import javax.sql.rowset.serial.SerialArray;
 import java.io.FileOutputStream;
@@ -23,7 +24,6 @@ import static sample.BytteAvScener.lastInnStage;
 public class OpprettBrukerController implements Serializable {
     Alert alarmboks = new Alert(Alert.AlertType.INFORMATION); // Lager en alarmboks
     Alert bekreftelse = new Alert(Alert.AlertType.INFORMATION); //Lager en bekreftelse
-
 
 
     @FXML
@@ -49,21 +49,22 @@ public class OpprettBrukerController implements Serializable {
         try {
             sjekkOmAlleFeltErFyltUt();
             regExforInputFeilt();
+            sjekkOmBrukerEksisterer();
             labelBekreftelse.setText("Bruker opprettet");
-            Bruker bruker1=new Bruker(txtFornavn.getText().toString(),txtEtternavn.getText().toString(),txtEmail.getText().toString(),txtTelefon.getText().toString(),txtPassord.getText().toString());
+            Bruker bruker1 = new Bruker(txtFornavn.getText().toString(), txtEtternavn.getText().toString(), txtEmail.getText().toString(), txtTelefon.getText().toString(), txtPassord.getText().toString());
+
             brukereListe.add(bruker1);
-            ObjectOutputStream objectOutputStream=new ObjectOutputStream(new FileOutputStream("src/sample/brukerSerialisert/bruker.ser"));
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/brukerSerialisert/bruker.ser"));
             objectOutputStream.writeObject(new ArrayList<>(brukereListe));
             lastInnStage(actionEvent, "/sample/sample.fxml");
             objectOutputStream.close();
-        }
-        catch (InputMismatchException e){
+
+        } catch (InputMismatchException e) {
             System.err.println(e.getMessage());
             alarmboks.setTitle("Feil i en av inputfeltene");
             alarmboks.setContentText(e.getMessage());
             alarmboks.show();
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
             alarmboks.setTitle("Feil i en av inputfeltene");
             alarmboks.setContentText(e.getMessage());
@@ -80,34 +81,50 @@ public class OpprettBrukerController implements Serializable {
     }
 
     private void sjekkOmAlleFeltErFyltUt() throws InputMismatchException {
-        if (txtFornavn.getText().equals("")  || txtEtternavn.getText().equals("") || txtEmail.getText().equals("")||txtTelefon.getText().equals("")) {
+        if (txtFornavn.getText().equals("") || txtEtternavn.getText().equals("") || txtEmail.getText().equals("") || txtTelefon.getText().equals("")) {
             throw new InputMismatchException("Alle feltene er ikke fylt ut ");
         }
     }
-    private String regExforInputFeilt() throws IllegalArgumentException{
-        String fornavn =txtFornavn.getText();
-        String etternavn= txtEtternavn.getText();
-        String email=txtEmail.getText();
-        String telefon=txtTelefon.getText();
-        String regexFornavn = "^[a-zA-Z-������\\s]+";
-        String regexEtternavn= "^[a-zA-Z-������\\s]+";
-        String regexEmail="[^@]+@[^\\.]+\\..+";
-        String regexTelefon="\\d{8}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
-        if (!(fornavn.matches(regexFornavn))){
+    private void sjekkOmBrukerEksisterer() {
+        brukereListe.forEach((x) -> {
+            if ((txtTelefon.getText().equals(x.getTelefon()) || txtEmail.getText().equals(x.getEmail())) || (txtEtternavn.equals(x.getEtternavn()))) {
+                alarmboks.setTitle("Opprett en annen bruker");
+                alarmboks.setHeaderText("Bruker eksisterer allerede");
+                alarmboks.setContentText("Vennligst opprett en ny bruker");
+                alarmboks.show();
+                throw new IllegalArgumentException("Bruker eksisterer allerede");
+            }
+        });
+    }
+
+    private String regExforInputFeilt() throws IllegalArgumentException {
+        String fornavn = txtFornavn.getText();
+        String etternavn = txtEtternavn.getText();
+        String email = txtEmail.getText();
+        String telefon = txtTelefon.getText();
+        String regexFornavn = "^[a-zA-Z-øæåØÆÅ\\s]+";
+        String regexEtternavn = "^[a-zA-Z-øæåØÆÅ\\s]+";
+        String regexEmail = "[^@]+@[^\\.]+\\..+";
+        String regexTelefon = "\\d{8}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}";
+        if (!(fornavn.matches(regexFornavn))) {
             throw new IllegalArgumentException("Ikke gyldig fornavn");
         }
-        if (!(etternavn.matches(regexEtternavn))){
+        if (!(etternavn.matches(regexEtternavn))) {
             throw new IllegalArgumentException("Ikke gyldig etternavn");
         }
-        if (!(email.matches(regexEmail))){
+        if (!(email.matches(regexEmail))) {
             throw new IllegalArgumentException("Ikke gyldig email");
         }
-        if (!(telefon.matches(regexTelefon))){
+        if (!(telefon.matches(regexTelefon))) {
             throw new IllegalArgumentException("Ikke gyldig telefon");
         }
 
-    return "vellykket";
+        return "vellykket";
     }
+
+
+
+
 
 
 

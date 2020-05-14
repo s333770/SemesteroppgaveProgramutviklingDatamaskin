@@ -10,18 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.OpprettBruker.OpprettBrukerController">
-    <HBox alignment="CENTER" prefHeight="81.0" prefWidth="497.0" spacing="30.0">
-        <children>
-            <VBox prefHeight="100.0" prefWidth="118.0" />
-            <VBox prefHeight="100.0" prefWidth="122.0" />
-            <VBox prefHeight="200.0" prefWidth="100.0" />
-            <VBox prefHeight="100.0" prefWidth="128.0" />
-        </children>
-        <padding>
-            <Insets top="30.0" />
-        </padding>
-    </HBox>
-   <HBox alignment="CENTER" layoutX="1.0" layoutY="150.0" prefHeight="100.0" prefWidth="594.0" spacing="30.0">
+   <HBox alignment="CENTER" layoutX="1.0" layoutY="150.0" prefHeight="100.0" prefWidth="600.0" spacing="30.0">
       <children>
          <VBox prefHeight="200.0" prefWidth="100.0">
             <children>
@@ -55,7 +44,10 @@
          </VBox>
       </children>
    </HBox>
-   <Label alignment="CENTER" layoutX="163.0" layoutY="32.0" prefHeight="91.0" prefWidth="275.0" text="Legg inn dine personalia" />
+   <Label alignment="CENTER" layoutX="163.0" layoutY="32.0" prefHeight="91.0" prefWidth="275.0" text="Personalia">
+      <font>
+         <Font name="System Bold" size="36.0" />
+      </font></Label>
     <Label fx:id="labelBekreftelse" alignment="CENTER" lineSpacing="20.0" prefHeight="58.0" prefWidth="350.0" textFill="#246131">
         <padding>
             <Insets top="30.0" />

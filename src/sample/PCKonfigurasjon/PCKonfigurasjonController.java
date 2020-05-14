@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static sample.Bruker.Bruker.opprettedeBrukere;
+import static sample.Bruker.Bruker.valgtBruker;
 import static sample.BytteAvScener.lastInnStage;
+import static sample.CSVWriter.writer;
 import static sample.Datamaskin.Harddisk.*;
 import static sample.Datamaskin.Minne.*;
 import static sample.Datamaskin.Prosessor.*;
@@ -116,7 +118,7 @@ public class PCKonfigurasjonController implements Initializable {
         try {
             oisMinne = new ObjectInputStream(fisMinne);
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream");
+            System.err.println("Klarer ikke ï¿½ ï¿½pne inputstream");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil");
@@ -126,12 +128,12 @@ public class PCKonfigurasjonController implements Initializable {
             tableViewMinne.setItems(minneListeDeserialisert);
 
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream");
+            System.err.println("Klarer ikke ï¿½ ï¿½pne inputstream");
         } catch (ClassNotFoundException e) {
             System.err.println("Finner ikke klasse");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Null value for minne");
     }
         /*#############################################################################*/
         FileInputStream fisSkjermkort = null;
@@ -147,10 +149,10 @@ public class PCKonfigurasjonController implements Initializable {
         try {
             oisSkjermkort = new ObjectInputStream(oisSkjermkort);
         } catch (IOException e) {
-            System.err.println("Klarer ikke å lese inputstream");
+            System.err.println("Klarer ikke ï¿½ lese inputstream");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Null value for prosessor");
         }
 
         try {
@@ -163,7 +165,7 @@ public class PCKonfigurasjonController implements Initializable {
             System.err.println("Finner ikke klasse");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Null value for skjermkort");
         }
 
 
@@ -181,7 +183,7 @@ public class PCKonfigurasjonController implements Initializable {
             System.err.println("Finner ikke fil");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Null value harddisk");
         }
         try {
             harddiskListeDeserialisert= FXCollections.observableList((List<Harddisk>) oisHarddisk.readObject());
@@ -232,7 +234,6 @@ public class PCKonfigurasjonController implements Initializable {
         harddiskPris=tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddiskPris().toString();
         totalPris=Integer.parseInt(prosessorPris)+Integer.parseInt(minnePris)+Integer.parseInt(skjermkortPris)+Integer.parseInt(harddiskPris);
 
-
         Datamaskin valgtDatamaskin= new Datamaskin(
                 tableViewProsessor.getSelectionModel().getSelectedItem().getProsessor().toString(),
         tableViewMinne.getSelectionModel().getSelectedItem().getMinne().toString(),
@@ -240,16 +241,9 @@ public class PCKonfigurasjonController implements Initializable {
         tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
                         totalPris.toString());
 
-        FileChooser fileChooser=new FileChooser();
-        /*
 
-
-        try {
-            skrivDataTilCSVFil(valgtDatamaskin,file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-*/
+        writer(valgtBruker.get(0),valgtDatamaskin);
+        valgtBruker.clear();
 
     }
 
@@ -268,7 +262,7 @@ public class PCKonfigurasjonController implements Initializable {
             lblBeregnetPris.setText(totalPris.toString());
         }
         catch(NullPointerException e){
-            alarmboks.setContentText("Vennligst velg en av hvert komponent");
+            alarmboks.setHeaderText("Vennligst velg en av hvert komponent");
             alarmboks.setTitle("Ikke alle komponenter er valgt");
             alarmboks.show();
         }

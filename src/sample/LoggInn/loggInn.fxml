@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="462.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.LoggInn.LoggInnController">
    <children>
@@ -12,13 +13,16 @@
          <children>
             <TextField fx:id="txtTelefonEmail" layoutX="20.0" layoutY="34.0" />
             <TextField fx:id="txtPassord" layoutX="20.0" layoutY="93.0" />
-            <Label layoutX="63.0" layoutY="6.0" text="Email/Telefon" />
-            <Label layoutX="78.0" layoutY="69.0" text="Passord" />
-            <Button layoutX="73.0" layoutY="146.0" mnemonicParsing="false" onAction="#loggInn" text="Logg Inn" />
-            <Button layoutX="73.0" layoutY="185.0" mnemonicParsing="false" onAction="#tilbake" text="Tilbake" />
+            <Label layoutX="58.0" layoutY="6.0" text="Email/Telefon" />
+            <Label layoutX="74.0" layoutY="69.0" text="Passord" />
+            <Button layoutX="63.0" layoutY="146.0" mnemonicParsing="false" onAction="#loggInn" text="Logg Inn" />
+            <Button layoutX="68.0" layoutY="187.0" mnemonicParsing="false" onAction="#tilbake" text="Tilbake" />
          </children>
       </AnchorPane>
-      <TextArea layoutX="23.0" layoutY="334.0" prefHeight="114.0" prefWidth="555.0" text="Kommentar:&#10;Her skal systemet lese inn de serialiserte brukerne lagret i &quot;bruker.ser&quot;. &#10;Dersom det mot formodning skulle oppstå problemer med &#10;dette \n kan man bruke testbrukeren for å logge inn, &#10;her er telefon=&quot;12345678&quot; og passord=&quot;testpassord&quot;" />
-      <Label alignment="CENTER" layoutX="186.0" layoutY="19.0" prefHeight="63.0" prefWidth="282.0" text="Logg inn" />
+      <TextArea layoutX="23.0" layoutY="334.0" opacity="0.62" prefHeight="114.0" prefWidth="555.0" text="Kommentar:&#10;Her skal systemet lese inn de serialiserte brukerne lagret i &quot;bruker.ser&quot;. &#10;Dersom det mot formodning skulle oppstå problemer med &#10;dette kan man bruke testbrukeren for å logge inn.&#10;Testbrukeren har telefon: 12345678&#10;Passord: testpassord" />
+      <Label alignment="CENTER" layoutX="160.0" layoutY="24.0" prefHeight="63.0" prefWidth="282.0" text="Logg inn">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
    </children>
 </AnchorPane>

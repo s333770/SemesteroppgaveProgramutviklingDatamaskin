@@ -101,23 +101,23 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         } catch (IOException e) {
             System.err.println("Det er ingen readObjects for prosessor");;
         } catch (ClassNotFoundException e) {
-            System.err.println("Finner ikke klasse");
+            System.err.println("Finner ikke klasse for prosessor");
         }
         catch (NullPointerException npe){
-            npe.printStackTrace();
+            System.err.println("Det er ikke valgt et element");
         }
         /*#############################################################################*/
         FileInputStream fisMinne = null;
         try {
             fisMinne = new FileInputStream("src/sample/komponenterSerialisert/minne.ser");
         } catch (FileNotFoundException e) {
-            System.err.println("Finner ikke serialisert fil");
+            System.err.println("Finner ikke serialisert  for minne");
         }
         ObjectInputStream oisMinne = null;
         try {
             oisMinne = new ObjectInputStream(fisMinne);
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream");
+            System.err.println("Klarer ikke å åpne inputstream for minne");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil");
@@ -127,9 +127,9 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
             tableViewMinne.setItems(minneListeDeserialisert);
 
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream");
+            System.err.println("Klarer ikke å åpne inputstream for ");
         } catch (ClassNotFoundException e) {
-            System.err.println("Finner ikke klasse");
+            System.err.println("Finner ikke klasse for minne");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil");
@@ -139,7 +139,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         try {
             fisSkjermkort = new FileInputStream("src/sample/komponenterSerialisert/skjermkort.ser");
         } catch (FileNotFoundException e) {
-            System.err.println("Finner ikke fil");
+            System.err.println("Finner ikke fil for skjermkort");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil");
@@ -151,7 +151,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
             System.err.println("Klarer ikke å lese inputstream");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Det er ikke opprettet en slik fil for skjermkort");
         }
 
         try {
@@ -187,14 +187,13 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         try {
             harddiskListeDeserialisert= FXCollections.observableList((List<Harddisk>) oisHarddisk.readObject());
             tableViewHarddisk.setItems(harddiskListeDeserialisert);
-
         } catch (IOException e) {
             System.err.println("Finner ikke fil");
         } catch (ClassNotFoundException e) {
-            System.err.println("Finner ikke fil");
+            System.err.println("Finner ikke klasse harddisk");
         }
         catch(NullPointerException npe){
-            System.err.println("Det er ikke opprettet en slik fil");
+            System.err.println("Finner ikke harddiskfil");
         }
 
     }

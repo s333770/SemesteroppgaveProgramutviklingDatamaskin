@@ -14,6 +14,7 @@ public class Bruker implements Serializable {
     public static ObservableList<Bruker> brukereListe= FXCollections.observableArrayList();
     public static ObservableList<Bruker> ferdigOpprettet=FXCollections.observableArrayList();
     public static List<Bruker> opprettedeBrukere=new ArrayList<>();
+    public static List<Bruker> valgtBruker=new ArrayList<>();
     private transient SimpleStringProperty fornavn;
     private transient SimpleStringProperty etternavn;
     private transient SimpleStringProperty email;
@@ -124,17 +125,7 @@ public class Bruker implements Serializable {
                 '}';
     }
 
-
-
-
-
-
-
-
-
-
-
-    public static Bruker testBruker=new Bruker("fornavn","etternavn","eksempel@mail.com","12345678","testPassord");
+    public static Bruker testBruker=new Bruker("fornavn","etternavn","eksempel@mail.com","12345678","testpassord");
 
 }
 

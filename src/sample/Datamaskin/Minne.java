@@ -44,8 +44,8 @@ public class Minne implements Serializable {
     public void setMinnePris(String minnePris) {
         this.minnePris.set(minnePris);
     }
-    public static Minne minne1=new Minne("25GB","400");
-    public static Minne minne2=new Minne("50GB","800");
+    public static Minne minne1=new Minne("8GB","400");
+    public static Minne minne2=new Minne("16GB","800");
 
     private void readObject(ObjectInputStream objectInputStream){
         try {

@@ -45,8 +45,8 @@ public class Harddisk implements Serializable {
     public void setHarddiskPris(String harddiskPris) {
         this.harddiskPris.set(harddiskPris);
     }
-    public static Harddisk harddisk1=new Harddisk("200 GB", "500");
-    public static Harddisk harddisk2=new Harddisk("100GB","1000");
+    public static Harddisk harddisk1=new Harddisk("500GB", "500");
+    public static Harddisk harddisk2=new Harddisk("1000GB","1000");
 
     private void readObject(ObjectInputStream objectInputStream){
         try {

@@ -82,16 +82,19 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         try {
             fisPros = new FileInputStream("src/sample/komponenterSerialisert/prosessor.ser");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Finner ikke fil");
         }
         catch (NullPointerException npe){
-            npe.printStackTrace();
+            System.err.println("Ikke lagren noen prosessorfil");
         }
         ObjectInputStream oisPros = null;
         try {
             oisPros = new ObjectInputStream(fisPros);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+        catch(NullPointerException e){
+            System.err.println("Null pointer for prosessor");
         }
 
         try {
@@ -117,7 +120,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         try {
             oisMinne = new ObjectInputStream(fisMinne);
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream for minne");
+            System.err.println("Klarer ikke ï¿½ ï¿½pne inputstream for minne");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil");
@@ -127,7 +130,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
             tableViewMinne.setItems(minneListeDeserialisert);
 
         } catch (IOException e) {
-            System.err.println("Klarer ikke å åpne inputstream for ");
+            System.err.println("Klarer ikke ï¿½ ï¿½pne inputstream for ");
         } catch (ClassNotFoundException e) {
             System.err.println("Finner ikke klasse for minne");
         }
@@ -148,7 +151,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
         try {
             oisSkjermkort = new ObjectInputStream(oisSkjermkort);
         } catch (IOException e) {
-            System.err.println("Klarer ikke å lese inputstream");
+            System.err.println("Klarer ikke ï¿½ lese inputstream");
         }
         catch(NullPointerException npe){
             System.err.println("Det er ikke opprettet en slik fil for skjermkort");
@@ -218,6 +221,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
                                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/prosessor.ser"));
                                 objectOutputStream.writeObject(new ArrayList<>(prosessorListe));
                                 objectOutputStream.close();
+                                tableViewProsessor.refresh();
                             } catch (FileNotFoundException e) {
                                 System.err.println("Feil lagringsbane er angitt ");
                             } catch (IOException e) {
@@ -231,6 +235,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
                                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/skjermkort.ser"));
                                 objectOutputStream.writeObject(new ArrayList<>(skjermkortListe));
                                 objectOutputStream.close();
+                                tableViewSkjermkort.refresh();
                             } catch (FileNotFoundException e) {
                                 System.err.println("Feil lagringsbane er angitt for skjermkort");
                             } catch (IOException e) {
@@ -243,6 +248,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
                                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/Minne.ser"));
                                 objectOutputStream.writeObject(new ArrayList<>(minneListe));
                                 objectOutputStream.close();
+                                tableViewMinne.refresh();
                             } catch (FileNotFoundException e) {
                                 System.err.println("Feil lagringsbane er  for minne ");
                             } catch (IOException e) {
@@ -255,6 +261,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
                                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("src/sample/komponenterSerialisert/harddisk.ser"));
                                 objectOutputStream.writeObject(new ArrayList<>(harddiskListe));
                                 objectOutputStream.close();
+                                tableViewHarddisk.refresh();
                             } catch (FileNotFoundException e) {
                                 System.err.println("Feil lagringsbane er angitt harddisk");
                             } catch (IOException e) {
@@ -264,7 +271,7 @@ public class AdministratorFXMLController extends PCKonfigurasjonController imple
                             System.out.println("Noe gikk galt");
                         }
                     } catch (InterruptedException e) {
-                        System.err.println("Trådprogrammering fungerer ikke");
+                        System.err.println("TrÃ¥dprogrammering fungerer ikke");
                     }
                     finally{
                         stopOpp();

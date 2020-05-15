@@ -16,6 +16,7 @@ import sample.Bruker.Bruker;
 import sample.Datamaskin.*;
 
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -29,7 +30,7 @@ import static sample.Datamaskin.Harddisk.*;
 import static sample.Datamaskin.Minne.*;
 import static sample.Datamaskin.Prosessor.*;
 import static sample.Datamaskin.Skjermkort.*;
-import static sample.SkrivData.SkrivUtDataCSV.skrivDataTilCSVFil;
+
 
 
 
@@ -83,16 +84,19 @@ public class PCKonfigurasjonController implements Initializable {
         try {
             fisPros = new FileInputStream("src/sample/komponenterSerialisert/prosessor.ser");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.err.println("Ingen prosessorfil");
         }
         catch (NullPointerException npe){
-            npe.printStackTrace();
+            System.err.println("Ingen prosessorer");
         }
         ObjectInputStream oisPros = null;
         try {
             oisPros = new ObjectInputStream(fisPros);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("IOException");}
+
+        catch (NullPointerException e){
+            System.err.println("Ikke noen serialisert prosessorFil");
         }
 
         try {
@@ -105,7 +109,7 @@ public class PCKonfigurasjonController implements Initializable {
             System.err.println("Finner ikke klasse");
         }
         catch (NullPointerException npe){
-            npe.printStackTrace();
+            System.err.println("Ikke noen serialisert prosessorfil");
         }
 /*#############################################################################*/
         FileInputStream fisMinne = null;
@@ -128,7 +132,7 @@ public class PCKonfigurasjonController implements Initializable {
             tableViewMinne.setItems(minneListeDeserialisert);
 
         } catch (IOException e) {
-            System.err.println("Klarer ikke � �pne inputstream");
+            System.err.println("Klarer ikke å åpne inputstream");
         } catch (ClassNotFoundException e) {
             System.err.println("Finner ikke klasse");
         }
@@ -240,10 +244,14 @@ public class PCKonfigurasjonController implements Initializable {
         tableViewSkjermkort.getSelectionModel().getSelectedItem().getSkjermkort().toString(),
         tableViewHarddisk.getSelectionModel().getSelectedItem().getHarddisk().toString(),
                         totalPris.toString());
+        try{
+            writer(valgtBruker.get(0),valgtDatamaskin);
+            valgtBruker.clear();
+        }
+        catch(IndexOutOfBoundsException e){
+            System.err.println("Fil er allerede skrevet, restart programmet");
+        }
 
-
-        writer(valgtBruker.get(0),valgtDatamaskin);
-        valgtBruker.clear();
 
     }
 
@@ -266,5 +274,6 @@ public class PCKonfigurasjonController implements Initializable {
             alarmboks.setTitle("Ikke alle komponenter er valgt");
             alarmboks.show();
         }
+
     }
 }
